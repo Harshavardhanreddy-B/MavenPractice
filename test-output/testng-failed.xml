@@ -3,13 +3,13 @@
 <suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
   <test thread-count="5" name="Default test(failed)">
     <classes>
-      <class name="dropdownhandling.JQueryDD">
+      <class name="practice.imagevalidate">
         <methods>
-          <include name="MultipleDD"/>
+          <include name="img"/>
           <include name="start"/>
           <include name="teardown"/>
         </methods>
-      </class> <!-- dropdownhandling.JQueryDD -->
+      </class> <!-- practice.imagevalidate -->
     </classes>
   </test> <!-- Default test(failed) -->
 </suite> <!-- Failed suite [Default suite] -->

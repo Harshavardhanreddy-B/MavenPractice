@@ -30,6 +30,8 @@ public class GenericmethodDD extends base {
 		dropdownhandles(dd.NoOfEmployees(), data1);
 		dropdownhandles(dd.Industries(), data2);
 		dropdownhandles(dd.Country(), data3);
+		highlightElement(dd.Country());
+		getScreenShotPath(driver.getClass().getSimpleName(), driver);
 		Thread.sleep(5000);
 	}
 
