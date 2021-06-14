@@ -1,10 +1,19 @@
 package resources;
 
+import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.commons.io.FileUtils;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
@@ -33,7 +42,30 @@ public class base {
 		driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		return driver;
+	}
 
+	public String getScreenShotPath(String Testcasename, WebDriver driver) throws IOException {
+		Calendar calender = Calendar.getInstance();
+		SimpleDateFormat formatter = new SimpleDateFormat("dd_MM_yyy_hh_mm_ss");
+		TakesScreenshot ts = (TakesScreenshot) driver;
+		File source = ts.getScreenshotAs(OutputType.FILE);
+		String destinationFile = System.getProperty("user.dir") + "\\reports\\" + Testcasename
+				+ formatter.format(calender.getTime()) + ".png";
+		FileUtils.copyFile(source, new File(destinationFile));
+		return destinationFile;
+	}
+
+	public void highlightElement(WebElement ele) throws InterruptedException {
+		try {
+			JavascriptExecutor js = (JavascriptExecutor) driver;
+			// use executeScript() method and pass the arguments
+			// Here i pass values based on css style. Yellow background color with solid red
+			// color border.
+			js.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", ele);
+
+		} catch (Exception e) {
+			System.out.println("Exception - " + e.getMessage());
+		}
 	}
 
 }
